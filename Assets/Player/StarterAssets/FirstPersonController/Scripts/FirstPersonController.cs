@@ -51,6 +51,8 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp = -90.0f;
 
+		public Animator WeaponAnimator;
+
 		// cinemachine
 		private float _cinemachineTargetPitch;
 
@@ -154,8 +156,7 @@ namespace StarterAssets
 
 		private void Attack()
 		{
-            
-
+			WeaponAnimator.SetBool("IsAttackHeld", _input.attack);
         }
 
 		private void Move()

@@ -52,6 +52,7 @@ namespace StarterAssets
 		public float BottomClamp = -90.0f;
 
 		public Animator WeaponAnimator;
+		public GameObject flashlight;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -158,6 +159,14 @@ namespace StarterAssets
 		{
 			WeaponAnimator.SetBool("IsAttackHeld", _input.attack);
         }
+
+		private void ToggleFlashlight()
+		{
+			if(_input.flashlightToggle)
+			{
+				flashlight.SetActive(!flashlight.activeSelf);
+			}
+		}
 
 		private void Move()
 		{

@@ -13,6 +13,7 @@ namespace StarterAssets
 		public bool jump;
 		public bool sprint;
 		public bool attack;
+		public bool flashlightToggle;
 
 		[Header("Movement Settings")]
 		public bool analogMovement;
@@ -49,6 +50,11 @@ namespace StarterAssets
 		{
 			AttackInput(value.isPressed);
 		}
+
+		public void OnFlashlightToggle(InputValue value)
+		{
+			FlashlightToggle(value.isPressed);
+		}
 #endif
 
 
@@ -75,6 +81,11 @@ namespace StarterAssets
 		public void AttackInput(bool newAttackState)
 		{
 			attack = newAttackState;
+		}
+
+		public void FlashlightToggle(bool newFlashlightState)
+		{
+			flashlightToggle = newFlashlightState;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

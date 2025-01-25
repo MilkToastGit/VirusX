@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class SeachBehaviour : AIBehaviour
+public class SearchBehaviour : AIBehaviour
 {
     public override bool Active => true;
 
@@ -11,24 +11,23 @@ public class SeachBehaviour : AIBehaviour
 
     public float idleTimeout;
 
+    public Animator animator;
     private NavMeshAgent agent;
-    private Animator animator;
 
     private float elapsedTimeIdling;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
     }
 
     private void Update()
     {
         if (!Active)
             return;
-
+        
         Roam();
-        //UpdateAnimator();
+        UpdateAnimator();
     }
 
     private void UpdateAnimator()
@@ -38,7 +37,6 @@ public class SeachBehaviour : AIBehaviour
 
     private void Roam()
     {
-        Debug.Log(agent.velocity + ", " + elapsedTimeIdling);
         if (agent.velocity.magnitude <= 0)
         {
             elapsedTimeIdling += Time.deltaTime;
@@ -46,9 +44,7 @@ public class SeachBehaviour : AIBehaviour
 
         if (elapsedTimeIdling > idleTimeout)
         {
-            Debug.Log(agent.destination);
             agent.SetDestination(GetRandomPoint());
-            Debug.Log(agent.destination);
 
             elapsedTimeIdling = 0;
         }
@@ -65,9 +61,6 @@ public class SeachBehaviour : AIBehaviour
         Vector3 randomPoint = new Vector3(randomPoint2D.x, 0, randomPoint2D.y);
 
         randomPoint += transform.position;
-
-        Debug.Log($"RandomPoint: {randomPoint}");
-
 
         return randomPoint;
     }

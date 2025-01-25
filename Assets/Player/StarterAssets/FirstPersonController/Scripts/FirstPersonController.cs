@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -53,6 +54,8 @@ namespace StarterAssets
 
 		public Animator WeaponAnimator;
 		public GameObject flashlight;
+
+		private bool isFirstFrameOfFlashlightToggle = true;
 
 		// cinemachine
 		private float _cinemachineTargetPitch;
@@ -119,6 +122,7 @@ namespace StarterAssets
 			GroundedCheck();
 			Move();
 			Attack();
+            CheckFlashlightToggle();
 		}
 
 		private void LateUpdate()
@@ -160,12 +164,23 @@ namespace StarterAssets
 			WeaponAnimator.SetBool("IsAttackHeld", _input.attack);
         }
 
+		private void CheckFlashlightToggle()
+		{
+            if (_input.flashlightToggle && isFirstFrameOfFlashlightToggle)
+            {
+                ToggleFlashlight();
+                isFirstFrameOfFlashlightToggle = false;
+            }
+
+            if (!_input.flashlightToggle)
+            {
+                isFirstFrameOfFlashlightToggle = true;
+            }
+        }
+
 		private void ToggleFlashlight()
 		{
-			if(_input.flashlightToggle)
-			{
-				flashlight.SetActive(!flashlight.activeSelf);
-			}
+			flashlight.SetActive(!flashlight.activeSelf);
 		}
 
 		private void Move()

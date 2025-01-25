@@ -83,9 +83,9 @@ namespace StarterAssets
 			attack = newAttackState;
 		}
 
-		public void FlashlightToggle(bool newFlashlightState)
+		public void FlashlightToggle(bool newFlashlightToggle)
 		{
-			flashlightToggle = newFlashlightState;
+			flashlightToggle = newFlashlightToggle;
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

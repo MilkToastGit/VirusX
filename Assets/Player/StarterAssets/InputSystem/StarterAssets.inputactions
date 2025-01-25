@@ -52,12 +52,12 @@
                 },
                 {
                     "name": "FlashlightToggle",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "b613f33e-3b1b-47fd-923c-408973e43fd3",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [

@@ -8,18 +8,11 @@ public class SearchBehaviour : AIBehaviour
     public override bool Active => true;
 
     public float SearchRadius;
-
     public float idleTimeout;
 
-    public Animator animator;
-    private NavMeshAgent agent;
+    public DogController controller;
 
     private float elapsedTimeIdling;
-
-    private void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
 
     private void Update()
     {
@@ -27,24 +20,18 @@ public class SearchBehaviour : AIBehaviour
             return;
         
         Roam();
-        UpdateAnimator();
-    }
-
-    private void UpdateAnimator()
-    {
-        animator.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     private void Roam()
     {
-        if (agent.velocity.magnitude <= 0)
+        if (controller.IsStopped)
         {
             elapsedTimeIdling += Time.deltaTime;
         }
 
         if (elapsedTimeIdling > idleTimeout)
         {
-            agent.SetDestination(GetRandomPoint());
+            controller.Move(GetRandomPoint());
 
             elapsedTimeIdling = 0;
         }

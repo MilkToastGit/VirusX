@@ -10,13 +10,7 @@ public class AttackBehaviour : AIBehaviour
     public float attackRange;
     public Transform target;
 
-    public Animator animator;
-    private NavMeshAgent agent;
-
-    private void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-    }
+    public DogController controller;
 
     private void Update()
     {
@@ -24,10 +18,10 @@ public class AttackBehaviour : AIBehaviour
             return;
 
         if (InRangeOfTarget())
-            SetAttacking(true);
+            controller.SetAttacking(true);
         else
         {
-            SetAttacking(false);
+            controller.SetAttacking(false);
             Approach();
         }
     }
@@ -39,11 +33,6 @@ public class AttackBehaviour : AIBehaviour
 
     private void Approach()
     {
-        agent.SetDestination(target.position);
-    }
-
-    private void SetAttacking(bool attacking)
-    {
-        animator.SetBool("Attacking", attacking);
+        controller.Move(target.position);
     }
 }
